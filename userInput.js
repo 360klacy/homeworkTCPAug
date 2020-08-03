@@ -1,3 +1,7 @@
+// Download node, inquirer, and require them both. 
+// Require greeting function and call it before questions
+// Create a function for  questions with inquirer and save the responses to a local server userPswd.txt
+
 var inquirer = require("inquirer");
 var fs = require('fs');
 const Hello = require('./greeting.js')
@@ -27,15 +31,20 @@ inquirer
       name: "confirm"
     }
   ])
+
+//Continue function with conditional statement for password acceptance
+//Check if password do not match give user "err" return to begininning of questions
+//Everything else matches, continue with questions and write data from user input into local server file userPswd.txt
+//Give user a confirmation/success message once complete
+//Call the function
+
   .then(function(data) {
-    if (data.password !== data.confirm){ // checking if both entered passwords are same if not reenter all the information
+    if (data.password !== data.confirm){ 
       console.log("Passwords do not match, Please re-enter your information");
       userQuestions ();
     }else{
       var fs = require("fs");
-// storing user entered information in the userPassword.txt
       fs.writeFile("./userPswd.txt",  " User Name : " + data.username + " Email : " + data.emailAddy + " Password : " + data.password, function(err) {
-     // fs.appendFile("userPassword.txt",data.username + " : " + data.password, function(err) {
       if (err) {
           return console.log(err);
       }else{
